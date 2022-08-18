@@ -1,4 +1,4 @@
-name: Bussy
+name: Staging
 on:
   push:
     branches:
