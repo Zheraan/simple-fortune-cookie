@@ -9,7 +9,7 @@ on:
 jobs:
   Auto_test:
     name: Run automatic test
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps: 
       - name: Dowload source code
         uses: actions/checkout@v2
