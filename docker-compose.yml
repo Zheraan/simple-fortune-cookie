@@ -16,6 +16,10 @@ services:
     depends_on:
       - redis-db
       - go-backend
+    environment:
+      - BACKEND_DNS=go-backend
+    ports:
+      - "8080:8080"
 
   go-backend:
     container_name: go-backend
