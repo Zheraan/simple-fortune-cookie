@@ -23,6 +23,8 @@ services:
       context: ./backend/
     depends_on:
       - redis-db
+    environment:
+      - REDIS_DNS=redis-db
     networks:
       - dbbridge
 
