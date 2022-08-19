@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: production
+spec:
+  selector:
+    matchLabels:
+      name: production
+  replicas: 5
+  template:
+    metadata:
+      labels:
+        name: production
+    spec:
+      containers:
+      - name: go-frontend
+        image: zheraan/bruh # TODO change to go fetch the image from dockerhub
+        imagePullPolicy: Always
+        ports:
+        - containerPort: [8080,9000]
+        env:
+        - name: BACKEND_DNS=go-backend
+          value: "go-backend"

@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: production
+spec:
+  selector:
+    matchLabels:
+      name: production
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        name: production
+    spec:
+      containers:
+      - name: redis-db
+        image: zheraan/bruh # TODO change to go fetch the image from dockerhub
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 6379
+        env:
+        - name: ALLOW_EMPTY_PASSWORD
+          value: "yes"
