@@ -1,11 +1,14 @@
 FROM golang:latest
 
-WORKDIR ~
+ENV CGO_ENABLED=0
+ENV GOOS=linux
+WORKDIR /usr/src/app
 
-RUN mkdir backend
-COPY ./** ./backend/
+COPY go.mod go.sum ./
+RUN go mod download && go mod verify
 
-RUN cd ./backend && \
-    CGO_ENABLED=0 GOOS=linux go build -a -o golang-memtest .
+COPY . .
 
-CMD ["bash","./backend/launch.sh"]
+RUN go build -v -o /usr/local/bin/app ./...
+
+CMD ["app"]
