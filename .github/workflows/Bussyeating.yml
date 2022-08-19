@@ -2,7 +2,7 @@ name: Production
 on:
   push:
     branches:
-      - 'main'
+      -'main'
       - 'production'
   pull_request:
     branches:
@@ -41,6 +41,4 @@ jobs:
       # - name: Run application
       #   working-directory: ./frontend
       #   run: go run frontend && go test
-      - name: Test frontend build
-        working-directory: ./frontend
-        run: go test
+  
