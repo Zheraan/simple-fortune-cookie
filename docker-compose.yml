@@ -6,6 +6,8 @@ volumes:
 networks:
   dbbridge:
     driver: bridge
+  endsbridge:
+    driver: bridge
 
 services:
 
@@ -20,6 +22,8 @@ services:
       - BACKEND_DNS=go-backend
     ports:
       - "8080:8080"
+    networks:
+      - endsbridge
 
   go-backend:
     container_name: go-backend
@@ -31,6 +35,7 @@ services:
       - REDIS_DNS=redis-db
     networks:
       - dbbridge
+      - endsbridge
 
   redis-db:
     container_name: redis-db
