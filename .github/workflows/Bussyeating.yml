@@ -4,10 +4,12 @@ on:
     branches:
       - 'main'
       - 'production'
+      - 'additional'
   pull_request:
     branches:
       - 'main'
       - 'production'
+      - 'additional'
 jobs:
   Auto_test:
     name: Run automatic test
