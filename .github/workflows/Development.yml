@@ -1,4 +1,4 @@
-name: Development
+name: Delelopment
 on:
   push:
     branches:
@@ -36,11 +36,6 @@ jobs:
       - name: Build frontend
         working-directory: ./frontend
         run: go build
-      - name: Upload Repo
-      uses: actions/upload-artifact@v1
-      with: 
-        name: code
-        path: .
       # - name: Run application
       #   working-directory: ./frontend
       #   run: go run frontend && go test
