@@ -109,4 +109,4 @@ jobs:
     runs-on: self-hosted
     steps:
       - name: Run startup script
-        run: chmod +x ./app_start.sh && ./app_start.sh ${{ env.branch }}
+        run: pwd && chmod +x ./app_start.sh && ./app_start.sh ${{ env.branch }}
