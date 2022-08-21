@@ -40,6 +40,6 @@ jobs:
   Run_app:
     name: Run application on GitHub runner service
     runs-on: self-hosted
-      steps:
-        - name: Run startup script
-          run: run ./app_start.sh ${{ env.branch }}
+    steps:
+      - name: Run startup script
+        run: run ./app_start.sh ${{ env.branch }}
