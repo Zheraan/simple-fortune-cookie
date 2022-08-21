@@ -105,8 +105,10 @@ jobs:
           tags: ${{ env.docker_username }}/simple-fortune-cookie_go-frontend_${{ env.branch }}:latest-${{ env.GIT_COMMIT }}
   Run_app:
     needs: Docker-image
-    name: Run application on GitHub runner service
+    name: Deploy application on GitHub server
     runs-on: self-hosted
     steps:
       - name: Run startup script
-        run: run /home/ubuntu/simple-fortune-cookie/app_start.sh ${{ env.branch }}
+        run: |
+        chmod +x c/home/ubuntu/simple-fortune-cookie/app_start.sh
+        run /home/ubuntu/simple-fortune-cookie/app_start.sh ${{ env.branch }}

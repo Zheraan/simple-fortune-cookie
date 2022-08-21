@@ -1,20 +1,20 @@
 #! /bin/bash
-if [$1 = 'main']
+if [ $1=="main" ]
 then
+    echo "Running $1 deployment."
     BRANCH=main docker-compose up
-fi
-
-if [$1 = 'staging']
+elif [ $1=="staging" ]
 then
+    echo "Running $1 deployment."
     BRANCH=staging docker-compose up
-fi
-
-if [$1 = 'production']
+elif [ $1=="production" ]
 then
+    echo "Running $1 deployment."
     BRANCH=production docker-compose up
-fi
-
-if [$1 = 'development']
+elif [ $1=="development" ]
 then
+    echo "Running $1 deployment."
     BRANCH=development docker-compose up
+else
+    echo "Something went wrong."
 fi
