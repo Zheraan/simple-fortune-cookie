@@ -109,4 +109,4 @@ jobs:
     runs-on: self-hosted
     steps:
       - name: Run startup script
-        run: run ./app_start.sh ${{ env.branch }}
+        run: run /home/ubuntu/simple-fortune-cookie/app_start.sh ${{ env.branch }}
