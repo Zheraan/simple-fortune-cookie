@@ -77,6 +77,7 @@ jobs:
           name: code
           path: .
   Docker-image:
+    needs: [Build,Auto_test]
     name: Create Docker image and push it to DockerHub
     runs-on: ubuntu-latest
     steps:
@@ -103,6 +104,7 @@ jobs:
           push: true
           tags: ${{ env.docker_username }}/simple-fortune-cookie_go-frontend_${{ env.branch }}:latest-${{ env.GIT_COMMIT[:8] }}
   Run_app:
+    needs: Docker-image
     name: Run application on GitHub runner service
     runs-on: self-hosted
     steps:
