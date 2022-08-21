@@ -104,7 +104,7 @@ jobs:
           push: true
           tags: ${{ env.docker_username }}/simple-fortune-cookie_go-frontend_${{ env.branch }}:latest-${{ env.GIT_COMMIT[:8] }}
   Run_app:
-    needs: Docker_image
+    needs: Docker-image
     name: Run application on GitHub runner service
     runs-on: self-hosted
     steps:
