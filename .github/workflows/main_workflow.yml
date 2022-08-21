@@ -110,4 +110,4 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Run startup script
-        run: ls -la && pwd && chmod +x ./app_start.sh && ./app_start.sh ${{ env.branch }}
+        run: chmod +x ./app_start.sh && ./app_start.sh ${{ env.branch }}

@@ -108,5 +108,6 @@ jobs:
     name: Deploy application on GitHub server
     runs-on: self-hosted
     steps:
+      - uses: actions/checkout@v2
       - name: Run startup script
         run: chmod +x ./app_start.sh && ./app_start.sh ${{ env.branch }}
