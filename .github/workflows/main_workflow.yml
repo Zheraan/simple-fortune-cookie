@@ -108,10 +108,6 @@ jobs:
     name: Deploy application on GitHub server
     runs-on: self-hosted
     steps:
-      - name: Download a single artifact
-        uses: actions/download-artifact@v2
-        with:
-          name: code
-          path: .
+      - uses: actions/checkout@v2
       - name: Run startup script
         run: ls -la && pwd && chmod +x ./app_start.sh && ./app_start.sh ${{ env.branch }}
