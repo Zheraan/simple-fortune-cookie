@@ -96,17 +96,18 @@ jobs:
         with:
           context: ./backend
           push: true
-          tags: ${{ env.docker_username }}/simple-fortune-cookie_go-backend_${{ env.branch }}:latest-${{ env.GIT_COMMIT[:8] }}
+          tags: ${{ env.docker_username }}/simple-fortune-cookie_go-backend_${{ env.branch }}:latest-${{ env.GIT_COMMIT }}
       - name: Build and push frontend Dockerfile
         uses: docker/build-push-action@v3
         with:
           context: ./frontend
           push: true
-          tags: ${{ env.docker_username }}/simple-fortune-cookie_go-frontend_${{ env.branch }}:latest-${{ env.GIT_COMMIT[:8] }}
+          tags: ${{ env.docker_username }}/simple-fortune-cookie_go-frontend_${{ env.branch }}:latest-${{ env.GIT_COMMIT }}
   Run_app:
     needs: Docker-image
-    name: Run application on GitHub runner service
+    name: Deploy application on GitHub server
     runs-on: self-hosted
     steps:
+      - uses: actions/checkout@v2
       - name: Run startup script
-        run: run ./app_start.sh ${{ env.branch }}
+        run: chmod +x ./app_start.sh && ./app_start.sh ${{ env.branch }}
