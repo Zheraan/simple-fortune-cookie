@@ -2,7 +2,7 @@ name: stg_release
 env:
   docker_username: ${{ secrets.DOCKER_USERNAME }}
   docker_password: ${{ secrets.DOCKER_PASSWORD }}
-  GIT_COMMIT: ${{ github.sha[:8] }}
+  GIT_COMMIT: ${{ github.sha }}
   branch: 'staging'
 on:
   workflow_run:
@@ -30,13 +30,13 @@ jobs:
         with:
           context: ./backend
           push: true
-          tags: ${{ env.docker_username }}/simple-fortune-cookie_go-backend_${{ env.branch }}:latest-${{ env.GIT_COMMIT }}
+          tags: ${{ env.docker_username }}/simple-fortune-cookie_go-backend_${{ env.branch }}:latest-${{ env.GIT_COMMIT[:8] }}
       - name: Build and push frontend Dockerfile
         uses: docker/build-push-action@v3
         with:
           context: ./frontend
           push: true
-          tags: ${{ env.docker_username }}/simple-fortune-cookie_go-frontend_${{ env.branch }}:latest-${{ env.GIT_COMMIT }}
+          tags: ${{ env.docker_username }}/simple-fortune-cookie_go-frontend_${{ env.branch }}:latest-${{ env.GIT_COMMIT[:8] }}
   Run_app:
     name: Run application on GitHub runner service
     runs-on: self-hosted
