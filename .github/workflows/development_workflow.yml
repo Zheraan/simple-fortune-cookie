@@ -1,13 +1,13 @@
-name: main_release
+name: dev_release
 env:
   docker_username: ${{ secrets.DOCKER_USERNAME }}
   docker_password: ${{ secrets.DOCKER_PASSWORD }}
   GIT_COMMIT: ${{ github.sha[:8] }}
-  branch: 'main'
+  branch: 'development'
 on:
   workflow_run:
     workflows: [Furtune_cookie_workflow]
-    branches: 'main'
+    branches: 'dev/**'
     types:
       - completed
 jobs:

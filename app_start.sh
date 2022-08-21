@@ -1,20 +1,20 @@
 #! /bin/bash
 if [$1 = 'main']
 then
-    docker-compose up
+    BRANCH=main docker-compose up
 fi
 
 if [$1 = 'staging']
 then
-    docker-compose up
+    BRANCH=staging docker-compose up
 fi
 
 if [$1 = 'production']
 then
-    docker-compose up
+    BRANCH=production docker-compose up
 fi
 
 if [$1 = 'development']
 then
-    docker-compose up
+    BRANCH=development docker-compose up
 fi
