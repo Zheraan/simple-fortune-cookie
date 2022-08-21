@@ -5,12 +5,77 @@ env:
   GIT_COMMIT: ${{ github.sha }}
   branch: 'staging'
 on:
-  workflow_run:
-    workflows: [Furtune_cookie_workflow]
-    branches: 'stg/**'
-    types:
-      - completed
+  push:
+    branches:
+      - 'stg/**'
+  pull_request:
+    branches:
+      - 'stg/**'
 jobs:
+  Clone_repo:
+    name: Clone repo and create artifact
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download and clone repo
+        uses: actions/checkout@v2
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: code
+          path: .
+  Build:
+    needs: Clone_repo
+    name: Install Go language and dependecies & build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download a single artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: code
+          path: .
+      - name: Setup Go for project
+        uses: actions/setup-go@v2
+        with:
+          go-version: '1.19.0'
+      - name: Install dependencies for backend
+        working-directory: ./backend
+        run: |
+          go version
+          go get -u golang.org/x/lint/golint
+      - name: Install dependencies for frontend
+        working-directory: ./frontend
+        run: |
+          go version
+          go get -u golang.org/x/lint/golint
+      - name: Build backend
+        working-directory: ./backend
+        run: go build
+      - name: Build frontend
+        working-directory: ./frontend
+        run: go build
+      - name: Update a Build Artifact
+        uses: actions/upload-artifact@v2
+        with: 
+          name: code
+          path: .
+  Auto_test:
+    needs: Build
+    name: Run automatic test for frontend
+    runs-on: ubuntu-latest
+    steps: 
+      - name: Download a single artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: code
+          path: .
+      - name: Test frontend build
+        working-directory: ./frontend
+        run: go test
+      - name: Update a Build Artifact
+        uses: actions/upload-artifact@v2
+        with: 
+          name: code
+          path: .
   Docker-image:
     name: Create Docker image and push it to DockerHub
     runs-on: ubuntu-latest
